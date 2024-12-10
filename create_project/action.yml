@@ -1,0 +1,23 @@
+name: Create Project
+description: Action to create a project in Terraform Cloud
+inputs:
+  terraform_token:
+    description: 'Terraform Cloud API Token'
+    required: true
+  organization:
+    description: 'Terraform Cloud Organization'
+    required: true
+  project_name:
+    description: 'Name of the project to create'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+  - uses: actions/checkout@v4
+  - name: Crear Proyecto
+    shell: bash
+    run: |
+      bash ${GITHUB_ACTION_PATH}/scripts/create_project.sh \
+        "${{ inputs.terraform_token }}" \
+        "${{ inputs.project_name }}"

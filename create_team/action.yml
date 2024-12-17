@@ -1,0 +1,23 @@
+name: Create Team
+description: Action to create a team in Terraform Cloud
+inputs:
+  terraform_token:
+    description: 'Terraform Cloud API Token'
+    required: true
+  organization:
+    description: 'Terraform Cloud Organization'
+    required: true
+  team_name:
+    description: 'Name of the team to create'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+  - uses: actions/checkout@v4
+  - name: Crear Equipo
+    shell: bash
+    run: |
+      bash ${GITHUB_ACTION_PATH}/scripts/create_team.sh \
+        "${{ inputs.terraform_token }}" \
+        "${{ inputs.team_name }}"

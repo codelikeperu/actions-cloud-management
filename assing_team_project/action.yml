@@ -1,0 +1,23 @@
+name: Assign Team to Project
+description: Action to assign a team to a project in Terraform Cloud
+inputs:
+  terraform_token:
+    description: 'Terraform Cloud API Token'
+    required: true
+  organization:
+    description: 'Terraform Cloud Organization'
+    required: true
+  project_name:
+    description: 'Name of the project'
+    required: true
+  team_name:
+    description: 'Name of the team to assign to the project'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+  - uses: actions/checkout@v4
+  - name: Asignar Equipo al Proyecto
+    run: ./assign_team_to_project.sh ${{ inputs.terraform_token }} ${{ inputs.organization }} ${{ inputs.project_name }} ${{ inputs.team_name }}
+    shell: bash
